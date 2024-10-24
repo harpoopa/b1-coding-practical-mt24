@@ -1,8 +1,8 @@
 from __future__ import annotations
 from dataclasses import dataclass
-import numpy as np
-import matplotlib.pyplot as plt
-from .terrain import generate_reference_and_limits
+import numpy as np # type: ignore
+import matplotlib.pyplot as plt  # type: ignore
+from terrain import generate_reference_and_limits
 
 class Submarine:
     def __init__(self):
@@ -63,7 +63,7 @@ class Trajectory:
         plt.show()
 
 @dataclass
-class Mission:
+class Mission: 
     reference: np.ndarray
     cave_height: np.ndarray
     cave_depth: np.ndarray
@@ -76,6 +76,11 @@ class Mission:
     @classmethod
     def from_csv(cls, file_name: str):
         # You are required to implement this method
+        data = np.genfromtxt(file_name, delimiter=',')
+        reference = data[:, 0]
+        cave_height = data[:, 1]
+        cave_depth = data[:, 2]
+        return cls(reference, cave_height, cave_depth)
         pass
 
 
